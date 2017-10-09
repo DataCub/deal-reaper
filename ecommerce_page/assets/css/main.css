@@ -1601,6 +1601,7 @@
 		margin: 0 0 2em 0;
 	}
 
+
 	h1, h2, h3, h4, h5, h6 {
 		color: #ffffff;
 		font-weight: 300;
@@ -1617,6 +1618,11 @@
 		font-size: 2em;
 		line-height: 1.5em;
 		letter-spacing: -0.025em;
+	}
+
+	h2 span {
+		color: #e44c65;
+		font-weight: bold;
 	}
 
 	h3 {
@@ -3405,6 +3411,7 @@
 					display: block;
 					width: 100%;
 					height: -webkit-fill-available;
+					opacity: 0.1;
 				}
 
 	body.is-touch #banner {
