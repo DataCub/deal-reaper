@@ -121,6 +121,40 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 </head>
 
 <body>
+  <div id="page-wrapper">
+
+  <!-- Header -->
+    <header id="header">
+    <div  class = "header">
+      <h1 id="logo"><img src="images/logo.png" style="float:right;width:40px;height:40px;" align = "middle">
+      <a href="index.html">DealReaper</a></h1>
+    </div>
+      <nav id="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+<!--              <li>
+            <a href="#">About Us</a>
+            <ul>
+              <li><a href="left-sidebar.html">Left Sidebar</a></li>
+              <li><a href="right-sidebar.html">Right Sidebar</a></li>
+              <li><a href="no-sidebar.html">No Sidebar</a></li>
+              <li>
+                <a href="#">Submenu</a>
+                <ul>
+                  <li><a href="#">Option 1</a></li>
+                  <li><a href="#">Option 2</a></li>
+                  <li><a href="#">Option 3</a></li>
+                  <li><a href="#">Option 4</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li> -->
+          <li><a href="elements.html">About Us</a></li>
+          <li><a href="signup.php" class="button">Sign Up</a></li>
+          <li><a href="login.php" class="button special">Log In</a></li>
+        </ul>
+      </nav>
+    </header>
   <div class="login">
 	<h1>Sign Up</h1>
     <form method="post">
