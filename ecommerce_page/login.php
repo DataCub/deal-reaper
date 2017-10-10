@@ -66,32 +66,17 @@
         </header>
 
       <!-- Banner -->
-        <section id="banner">
-          <div class="login">
-          	<h1 style="font-weight: bold">Login</h1>
-    			<form method="post">
-		    	<input name="username" placeholder="Email"/>
-		        <input name="password" placeholder="Password"/>
-		        <button class="btn btn-primary btn-block btn-large">Submit</button>
-    		</form>
-			</div>
-        </section>
+      <div class="login">
+      	<h1 style="font-weight: bold">Login</h1>
+			<form method="post">
+	    		<input type="text" name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" required="required" title="Email"/>
+	        	<input type="password" name="c" placeholder="Password" required="required" />
+	        	<button class="btn btn-primary btn-block btn-large">Submit</button>
+		</form>
+		</div>
+
 
       <!-- Footer -->
-        <footer id="footer">
-          <ul class="icons">
-            <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-            <li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
-          </ul>
-          <ul class="copyright">
-            <li>&copy; DealReaper. All rights reserved.</li><li>
-          </ul>
-        </footer>
-
     </div>
 
     <!-- Scripts -->
