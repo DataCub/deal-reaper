@@ -8,7 +8,7 @@
         echo "SUCCESSFULLY LOGIN TO USER PROFILE PAGE...";
         header('Location: HTTP://localhost/datareaper/index.html');
       } else {
-        echo "Not Logged in; Enter Username and Password";
+        echo "<p align=center>Not Logged in; Enter Username and Password</p>";
       }
     }
 ?>
@@ -69,7 +69,7 @@
       <div class="login">
       	<h1 style="font-weight: bold">Login</h1>
 			<form method="post">
-	    		<input type="text" name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" required="required" title="Email"/>
+	    		<input type="text" name="email" placeholder="Username" required="required" title="Email"/>
 	        	<input type="password" name="c" placeholder="Password" required="required" />
 	        	<button class="btn btn-primary btn-block btn-large">Submit</button>
 		</form>
