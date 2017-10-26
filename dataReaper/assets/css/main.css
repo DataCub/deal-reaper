@@ -2627,9 +2627,13 @@
 					width: calc(100% + 0.5em);
 				}
 
-					ul.actions.fit.small li {
+					ul.fit.small li {
 						padding: 0 0 0 0.5em;
 					}
+
+		ul.bitcoin {
+			width: 120px;
+		}
 
 	dl {
 		margin: 0 0 2em 0;
@@ -3515,6 +3519,11 @@
 
 				#footer .copyright li a {
 					color: inherit;
+				}
+
+
+				.bitbutton {
+					width: 120px;
 				}
 
 /* XLarge */
