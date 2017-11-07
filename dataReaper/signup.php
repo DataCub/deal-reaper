@@ -1,14 +1,57 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/SMTP.php';
+
 function signUp(){
   session_start();
   include 'reaper_db_connection.php';
+
+
+  $mail = new PHPMailer;
+  $mail->isSMTP();
+  //Enable SMTP debugging
+  // 0 = off (for production use)
+  // 1 = client messages
+  // 2 = client and server messages
+  $mail->SMTPDebug = 2;
+  //Set the hostname of the mail server
+  $mail->Host = 'smtp.gmail.com';
+  //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+  $mail->Port = 587;
+  //Set the encryption system to use - ssl (deprecated) or tls
+  $mail->SMTPSecure = 'tls';
+  //Whether to use SMTP authentication
+  $mail->SMTPAuth = true;
+  //Username to use for SMTP authentication - use full email address for gmail
+  $mail->Username = "cstestemail21@gmail.com";
+  //Password to use for SMTP authentication
+  $mail->Password = "dontsayit21";
+  //Set who the message is to be sent from
+  $mail->setFrom('cstestemail21@gmail.com', 'First Last');
+  //Set an alternative reply-to address
+  $email = trim($_POST['email']);
+  $mail->addAddress($email, 'My Friend');
+  $mail->Subject  = 'First PHPMailer Message';
+  $mail->Body     = 'Congrats, you\'ve succesfully signed up for DealReaper.com.';
+  if(!$mail->send()) {
+    echo 'Message was not sent.';
+    echo 'Mailer error: ' . $mail->ErrorInfo;
+  } else {
+      echo 'Message has been sent.';
+  }
+
   $name = trim($_POST['name']);
 
-  $email = trim($_POST['email']);
+
 
   $username = trim($_POST['username']);
 
   $password = trim($_POST['password']);
+
+  $query1 = mysql_query("SELECT * FROM user_login_info where Email = '$_POST[email]'");
 
   $address = trim($_POST['address']);
 
@@ -20,8 +63,14 @@ function signUp(){
 
   $query = NULL;
   $res = NULL;
-  $query = "INSERT IGNORE INTO user_login_info(name,email,username,password,address,city,state,zip) VALUES('$name','$email','$username','$password','$address','$city','$state','$zip')";
-  $res = mysqli_query($conn, $query);
+  $emailinUse = false;
+
+  if($query1 && mysql_num_rows($query1)>0){
+    $res = false;
+  } else {
+    $query = "INSERT IGNORE INTO user_login_info(Name,Email,Username,Password,Address,City,State,Zipcode) VALUES('$name','$email','$username','$password','$address','$city','$state','$zip')";
+    $res = mysql_query($query);
+  }
 
   if ($res) {
    $errTyp = "success";
@@ -31,6 +80,8 @@ function signUp(){
   } else {
    $errTyp = "danger";
    $errMSG = "Something went wrong, try again later...";
+   $emailinUse = true;
+   echo'<h1 style="text-align:center;" > Email Already in Use, Please Log In </h1>';
   }
 
 }
@@ -97,8 +148,8 @@ if(isset($_POST['signupBttn']))
   <div class="login">
 	<h1>Sign Up</h1>
     <form method="post">
-        <input type="text" name="name" placeholder="Full Name" pattern="[a-zA-Z][a-zA-Z ]{2,}" required="required" title="Enter a real name" />
-    	  <input type="text" name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" required="required" title="Enter a real email"/>
+        <input type="text" name="name" placeholder="Full Name" pattern="[a-zA-Z][a-zA-Z ]{2,}" required="required" title="Must be letters A-Z only" />
+    	  <input type="text" name="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" required="required" title="Enter a valid email"/>
         <input type="text" name="username" placeholder="Username" required="required" />
         <input type="password" name="c" placeholder="Password" required="required" />
         <input type="password" name="password" placeholder="Confirm Password" required="required" />

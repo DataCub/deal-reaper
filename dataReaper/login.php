@@ -1,20 +1,16 @@
 <?php
    include 'reaper_db_connection.php';
    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      $query = "SELECT * FROM user_login_info where username = $_POST[username] AND password = $_POST[password]";
-      $result = mysqli_query($conn, $query);
-      
-      $row = mysqli_fetch_row($result);
-
-      if(!empty($row['username']) AND !empty($row['password'])) {
+      $query = mysql_query("SELECT * FROM user_login_info where Username = '$_POST[username]' AND Password = '$_POST[password]'");
+      $row = mysql_fetch_array($query);
+      if(!empty($row['Username']) AND !empty($row['Password'])) {
         //$_SESSION['Username'] = $row['Password'];
-        echo "<p align=center>SUCCESSFULLY LOGIN TO USER PROFILE PAGE</p>" ;
+        echo "SUCCESSFULLY LOGIN TO USER PROFILE PAGE...";
         header('Location: HTTP://localhost/datareaper/index.html');
       } else {
         echo "<p align=center>Not Logged in; Enter Username and Password</p>";
       }
     }
-
 ?>
 
 ﻿<!DOCTYPE HTML>
