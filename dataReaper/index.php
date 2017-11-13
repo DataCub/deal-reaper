@@ -1,0 +1,298 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/SMTP.php';
+
+function newsSignUp(){
+  session_start();
+  include 'reaper_db_connection.php';
+
+  $mail = new PHPMailer;
+  $mail->isSMTP();
+  //Enable SMTP debugging
+  // 0 = off (for production use)
+  // 1 = client messages
+  // 2 = client and server messages
+  $mail->SMTPDebug = 2;
+  //Set the hostname of the mail server
+  $mail->Host = 'smtp.gmail.com';
+  //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+  $mail->Port = 587;
+  //Set the encryption system to use - ssl (deprecated) or tls
+  $mail->SMTPSecure = 'tls';
+  //Whether to use SMTP authentication
+  $mail->SMTPAuth = true;
+  //Username to use for SMTP authentication - use full email address for gmail
+  $mail->Username = "cstestemail21@gmail.com";
+  //Password to use for SMTP authentication
+  $mail->Password = "dontsayit21";
+  //Set who the message is to be sent from
+  $mail->setFrom('cstestemail21@gmail.com', 'DealReaper.com');
+  //Set an alternative reply-to address
+  $email = trim($_POST['newsEmail']);
+	$mail->addAddress($email, "New DataReaper Subscriber");
+
+	$mail->Subject  = 'Welcome to the Datareaper newsletter';
+	$mail->Body     = 'Hello, you\'ve succesfully signed up for DealReaper.com. To edit your account email settings please log in at datareaper.com';
+	if(!$mail->send()) {
+		echo 'Message was not sent.';
+		echo 'Mailer error: ' . $mail->ErrorInfo;
+	} else {
+			echo 'Message has been sent.';
+	}
+
+	if(isset($_POST['newsSignUpBtn'])){
+		newsSignUp();
+	}
+}
+	?>
+
+
+
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>DealReaper</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="landing">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+				<div  class = "header">
+					<h1 id="logo"><img src="images/logo.png" style="float:right;width:40px;height:40px;" align = "middle">
+					<a href="index.html">DealReaper</a></h1>
+				</div>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+<!-- 							<li>
+								<a href="#">About Us</a>
+								<ul>
+									<li><a href="left-sidebar.html">Left Sidebar</a></li>
+									<li><a href="right-sidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									<li>
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Option 1</a></li>
+											<li><a href="#">Option 2</a></li>
+											<li><a href="#">Option 3</a></li>
+											<li><a href="#">Option 4</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li> -->
+							<li><a href="elements.html">About Us</a></li>
+							<li><a href="signup.php" class="button">Sign Up</a></li>
+							<li><a href="login.php" class="button special">Log In</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2>Let Your Credit Card Work For <span>You </span> </h2>
+							<p>Automate price protection with DealReaper.<br />
+							Save thousands without trying.</p>
+						</header>
+					</div>
+					<a href="#one" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- One -->
+				<section id="one" class="spotlight style1 bottom">
+					<span class="image fit main"><img src="images/money.jpg" alt="" /></span>
+					<div class="content">
+						<div class="container">
+							<div class="row">
+								<div class="4u 12u$(medium)">
+									<header>
+										<h2>There were at least <b>$50 billion</b> in wasted savings from price protection last.</h2>
+										<p>Your Credit Card covers that. DealReaper makes it easy.</p>
+									</header>
+								</div>
+								<div class="4u 12u$(medium)">
+									<p>What is <span style="color: #e44c65; font-weight: bold;">price protection</span>?
+									<br>
+									<br>
+									When you purchase an item on a credit card, the price is <B>guaranteed</B> for 90 to 120 days.
+									<br>
+									<br>
+									<i> For Example - </i>
+									You buy a JCrew Suit for $299, but three weeks later, find the same suit advertised for $99 at Macy's.
+									<br>
+									<br>
+									<B>Your Credit Card company will pay you the difference.</B>
+									</p>
+								</div>
+								<div class="4u$ 12u$(medium)">
+									<p>
+									<b>But that's a rare example</b>
+									<br>
+									Realistically, you're not going to monitor all of your everday purchases and check to see if the prices drop within 90 days. Even if you do,
+									you have to file a claim through your credit card issuer for each price drop you find.
+									<br>
+									<br>
+									<B>That's a lot of work.</B>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a href="#two" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="spotlight style2 right">
+					<span class="image fit main"><img src="images/celebrate.jpg" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>We win a little. You win a lot more.</h2>
+							<p>All we take is 25% of the savings we find you.</p>
+						</header>
+						<p>If you don't end up saving anything, we won't charge you anything. We want to help you get money you're leaving on the table. Win-win.</p>
+						<ul class="actions">
+							<li><a href="#" class="button">Learn More</a></li>
+						</ul>
+					</div>
+					<a href="#three" class="goto-next scrolly">Next</a>
+				</section>
+
+			<!-- Three -->
+<!-- 				<section id="three" class="spotlight style3 left">
+					<span class="image fit main bottom"><img src="images/pic04.jpg" alt="" /></span>
+					<div class="content">
+						<header>
+							<h2>Interdum felis blandit praesent sed augue</h2>
+							<p>Accumsan integer ultricies aliquam vel massa sapien phasellus</p>
+						</header>
+						<p>Feugiat accumsan lorem eu ac lorem amet ac arcu phasellus tortor enim mi mi nisi praesent adipiscing. Integer mi sed nascetur cep aliquet augue varius tempus lobortis porttitor lorem et accumsan consequat adipiscing lorem.</p>
+						<ul class="actions">
+							<li><a href="#" class="button">Learn More</a></li>
+						</ul>
+					</div>
+					<a href="#four" class="goto-next scrolly">Next</a>
+				</section> -->
+
+			<!-- Four -->
+				<section id="four" class="wrapper style1 special fade-up">
+					<div class="container">
+						<header class="major">
+							<h2>Purchase an Account Today</h2>
+							<p>Start Saving Now.</p>
+							<ul class="actions">
+								<li><a href="signup.php" class="button">Sign Up</a></li>
+							</ul>
+
+								<form action="https://test.bitpay.com/checkout" method="post" >
+								  <input type="hidden" name="action" value="checkout" />
+								  <input type="hidden" name="posData" value="" />
+								  <input type="hidden" name="data" value="QPbavyRKP7VXn5XCsEIphNnkoibbs2QdJWj+zKLfA8kX5yxUsnItA2CDwF5r9n+uwBcOpG0U64gYQfaBsB0q9u4kemDEtzyPoKbZfgOsyJo=" />
+
+								  <input class="bitbutton" type="submit" value="" name="bitsubmit" alt="BitPay, the easy way to pay with bitcoins." />
+
+								</form>
+									</header>
+						<div class="box alt">
+							<div class="row uniform">
+								<section class="4u 6u(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-area-chart"></span>
+									<h3>Ipsum sed commodo</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u 6u$(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-comment"></span>
+									<h3>Eleifend lorem ornare</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u$ 6u(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-flask"></span>
+									<h3>Cubilia cep lobortis</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u 6u$(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-paper-plane"></span>
+									<h3>Non semper interdum</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u 6u(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-file"></span>
+									<h3>Odio laoreet accumsan</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+								<section class="4u$ 6u$(medium) 12u$(xsmall)">
+									<span class="icon alt major fa-lock"></span>
+									<h3>Massa arcu accumsan</h3>
+									<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec. Blandit orci porttitor.</p>
+								</section>
+							</div>
+						</div>
+						<footer class="major">
+							<ul class="actions">
+								<li><a href="#" class="button">Magna sed feugiat</a></li>
+							</ul> -->
+						</footer>
+					</div>
+				</section>
+
+			<!-- Five -->
+				<section id="five" class="wrapper style2 special fade">
+					<div class="container">
+						<header>
+							<h2>Sign Up for our Newsletter</h2>
+							<p>Get updates on the cards that you hold, and maximize their value.</p>
+						</header>
+						<form method="post" action="#" class="container 50%">
+							<div class="row uniform 50%">
+								<div class="8u 12u$(xsmall)"><input type="email" name="newsEmail" id="newsEmail" placeholder="Your Email Address" /></div>
+								<div class="4u$ 12u$(xsmall)"><input type="submit" name="newsSignUpBtn" value="Sign Up" class="fit special" /></div>
+							</div>
+						</form>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; DealReaper. All rights reserved.</li><li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
